@@ -1,4 +1,5 @@
 let flashcards = [];
+let virado = false;
 
 function iniciar() {
   const container = document.querySelector('#main-container');
@@ -35,6 +36,15 @@ function criarConjunto() {
   renderFlashcards();
 }
 
+function trocaPergunta(){
+  if(!virado)
+     text = 'RESPOSTA' 
+  else
+    text = 'PERGUNTA'
+
+    virado = !virado
+}
+
 function renderFlashcards() {
   const container = document.querySelector('#main-container');
   let flashcardListHTML = flashcards.map((flashcard, index) => `
@@ -55,15 +65,18 @@ function renderFlashcards() {
   container.innerHTML = `
     <div class="container sans-serif">
       <div class="flashcard-container">
-        <div class="flashcard-list">
-          <h2>LISTA DE FLASHCARDS</h2>
-          ${counterHTML}
-          ${flashcardListHTML}
-          <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
-          <button class="button" onclick="iniciar()">VOLTAR</button>
-        </div>
+      <div class="flashcard-list">
+      <h2>LISTA DE FLASHCARDS</h2>
+      ${counterHTML}
+      ${flashcardListHTML}
+      <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
+      <button class="button" onclick="iniciar()">VOLTAR</button>
+      </div>
+      <div class="flashcards-preview">
+      ${flashcards.length > 0 ? '<h2 class="pour">PERGUNTA</h2>' : ''}
         <div class="flashcard-preview">
           ${flashcards.length > 0 ? gerarPreviewHTML(0) : '<h2>Selecione um flashcard</h2>'}
+        </div>
         </div>
       </div>
     </div>
@@ -91,7 +104,9 @@ function gerarPreviewHTML(index) {
   `;
 }
 
-function virarFlashcard(card) {
+function virarFlashcard(card) {  
+  const text = document.querySelector('.pour')
+  text.textContent = text.textContent === 'PERGUNTA' ? 'RESPOSTA' : 'PERGUNTA'
   card.querySelector('.flashcard-inner').classList.toggle('is-flipped');
 }
 
