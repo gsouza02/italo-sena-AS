@@ -1,12 +1,17 @@
-const { app, BrowserWindow } = require('electron/main')
-const path = require('node:path')
+const { app, BrowserWindow, screen } = require('electron')
+const path = require('path')
 
 function createWindow () {
+  // Obtém a resolução da tela principal
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: width,
+    height: height,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true, // Adicione esta linha
+      contextIsolation: false // Adicione esta linha
     }
   })
 
