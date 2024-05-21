@@ -3,6 +3,19 @@
     src: url('fonts/Minecraft.ttf') format('truetype');
   }
 
+
+  @keyframes pulse {
+    0% {
+      transform: rotate(-30deg) scale(1);
+    }
+    50% {
+      transform: rotate(-30deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(-30deg) scale(1);
+    }
+  }
+
   body {
     margin: 0;
     display: flex;
@@ -16,7 +29,7 @@
     text-align: center;
   }
   .title {
-    font-size: 48px;
+    font-size: 72px;
     color: white;
     margin-bottom: 10px;
     position: relative;
@@ -28,11 +41,12 @@
     top: 0;
     right: -50px;
     transform: rotate(-30deg);
-    font-size: 16px;
+    font-size: 20px;
     color: yellow;
     text-shadow: 2px 2px 2px black;
     padding: 2px 5px;
     border-radius: 5px;
+    animation: pulse 1.5s infinite;
   }
   .line {
     width: 60%;
@@ -163,3 +177,8 @@
     justify-content: center;
     gap: 20px;
   }
+
+  .button:hover {
+    transform: scale(1.1, 1.1);
+  }
+  
