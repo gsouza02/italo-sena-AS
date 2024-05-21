@@ -84,6 +84,8 @@ function renderFlashcards() {
 }
 
 function mostrarPreview(index) {
+  const text = document.querySelector('.pour')
+  text.textContent = 'PERGUNTA'
   const previewContainer = document.querySelector('.flashcard-preview');
   previewContainer.innerHTML = gerarPreviewHTML(index);
 }
