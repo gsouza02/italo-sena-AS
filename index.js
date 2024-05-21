@@ -4,8 +4,8 @@ function iniciar() {
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container">
-      <button class="button" onclick="carregarConjunto()">CARREGAR CONJUNTO</button>
-      <button class="button" onclick="criarConjunto()">CRIAR CONJUNTO</button>
+      <button class="button" onclick="carregarConjunto()">INICIAR ESTUDO</button>
+      <button class="button" onclick="criarConjunto()">CRIAR FLASHCARDS</button>
       <button class="button" onclick="voltar()">VOLTAR</button>
     </div>
   `;
@@ -33,7 +33,7 @@ function carregarConjunto() {
 
 function criarConjunto() {
   renderFlashcards();
-    }
+}
 
 function renderFlashcards() {
   const container = document.querySelector('#main-container');
@@ -47,15 +47,20 @@ function renderFlashcards() {
     </div>
   `).join('');
 
-  console.log(flashcards.length)
+  let counterColor = flashcards.length >= 10 ? 'green' : 'red';
+  let counterMessage = flashcards.length >= 10 ? '' : ' (Mínimo: 10)';
+  
+  const counterHTML = `<div class="counter" style="color: ${counterColor}">${flashcards.length}/10${counterMessage}</div>`;
 
   container.innerHTML = `
     <div class="container sans-serif">
       <div class="flashcard-container">
         <div class="flashcard-list">
           <h2>LISTA DE FLASHCARDS</h2>
+          ${counterHTML}
           ${flashcardListHTML}
           <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
+          <button class="button" onclick="iniciar()">VOLTAR</button>
         </div>
         <div class="flashcard-preview">
           ${flashcards.length > 0 ? gerarPreviewHTML(0) : '<h2>Selecione um flashcard</h2>'}
@@ -99,6 +104,8 @@ function editarFlashcard(index) {
         <h2>Editar Flashcard</h2>
         <textarea id="edit-pergunta" rows="2" cols="75">${flashcard.pergunta}</textarea>
         <textarea id="edit-resposta" rows="2" cols="75">${flashcard.resposta}</textarea>
+        <div id="error-message" style="color: red;"></div>
+        <div class="button-container">
         <div class="button-container">
           <button class="button" onclick="salvarEdicao(${index})">SALVAR</button>
           <button class="button" onclick="criarConjunto()">CANCELAR</button>
@@ -111,6 +118,10 @@ function editarFlashcard(index) {
 function salvarEdicao(index) {
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
+  if (pergunta === '' || resposta === '') {
+    document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
+    return;
+  }
   flashcards[index] = { pergunta, resposta };
   criarConjunto();
 }
@@ -128,6 +139,7 @@ function criarFlashcard() {
         <h2>Criar Flashcard</h2>
         <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea>
         <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea>
+        <div id="error-message" style="color: red;"></div>
         <div class="button-container">
           <button class="button" onclick="salvarNovoFlashcard()">SALVAR</button>
           <button class="button" onclick="criarConjunto()">CANCELAR</button>
@@ -138,8 +150,12 @@ function criarFlashcard() {
 }
 
 function salvarNovoFlashcard() {
-  const pergunta = document.querySelector('#new-pergunta').value;
-  const resposta = document.querySelector('#new-resposta').value;
+  const pergunta = document.querySelector('#new-pergunta').value.trim();
+  const resposta = document.querySelector('#new-resposta').value.trim();
+  if (pergunta === '' || resposta === '') {
+    document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
+    return;
+  }
   flashcards.push({ pergunta, resposta });
   criarConjunto();
 }
