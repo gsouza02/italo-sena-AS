@@ -1,5 +1,11 @@
-const { app, BrowserWindow, screen } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, screen } = require('electron');
+const path = require('path');
+
+// Configure o electron-reload para monitorar mudanças nos arquivos
+require('electron-reload')(path.join(__dirname, '.'), {
+  // Exclua a monitoração do diretório node_modules
+  ignored: /node_modules|[\/\\]\./,
+});
 
 function createWindow () {
   // Obtém a resolução da tela principal

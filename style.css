@@ -65,6 +65,7 @@
     border-radius: 10px;
     padding: 20px;
     color: white;
+    overflow-y: auto;
   }
   .flashcard-list {
     flex: 1;
