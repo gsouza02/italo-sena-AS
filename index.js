@@ -63,25 +63,24 @@ function renderFlashcards() {
   const counterHTML = `<div class="counter" style="color: ${counterColor}">${flashcards.length}/10${counterMessage}</div>`;
 
   container.innerHTML = `
-  <div class="container sans-serif">
+    <div class="container sans-serif">
       <div class="flashcard-container">
-          <div class="flashcard-list">
-              <h2>LISTA DE FLASHCARDS</h2>
-              ${counterHTML}
-              ${flashcardListHTML}
-          </div>
-          <div class="flashcards-preview">
-              <div class="flashcard-preview">
-                  ${flashcards.length > 0 ? gerarPreviewHTML(0) : '<h2>Selecione um flashcard</h2>'}
-              </div>
-          </div>
-          <div class="button-container">
-              <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
-              <button class="button" onclick="iniciar()">VOLTAR</button>
-          </div>
+      <div class="flashcard-list">
+      <h2>LISTA DE FLASHCARDS</h2>
+      ${counterHTML}
+      ${flashcardListHTML}
+      <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
+      <button class="button" onclick="iniciar()">VOLTAR</button>
       </div>
-  </div>
-`;
+      <div class="flashcards-preview">
+        <div class="flashcard-preview">
+          ${flashcards.length > 0 ? gerarPreviewHTML(0) : '<h2>Selecione um flashcard</h2>'}
+        </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 function mostrarPreview(index) {
   const text = document.querySelector('.pour')
