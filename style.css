@@ -271,3 +271,24 @@ body {
   position:fixed;
   bottom: 0;
 }
+
+#new-pergunta{
+  background-color: #444;
+  border-color: #fff;
+  color: #fff;
+  resize: none;
+  opacity: 0.8;
+}
+
+textarea::placeholder{
+  color: #fff;
+}
+
+
+#new-resposta{
+  background-color: #444;
+  border-color: #fff;
+  color: #fff;
+  resize: none;
+  opacity: 0.8;
+}
