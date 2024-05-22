@@ -69,8 +69,8 @@ function renderFlashcards() {
       <h2>LISTA DE FLASHCARDS</h2>
       ${counterHTML}
       ${flashcardListHTML}
-      <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD</button>
-      <button class="button" onclick="iniciar()">VOLTAR</button>
+      <button class="button" onclick="criarFlashcard()">CRIAR FLASHCARD!</button>
+      <button class="button" onclick="iniciar()">VOLTAR!</button>
       </div>
       <div class="flashcards-preview">
         <div class="flashcard-preview">
