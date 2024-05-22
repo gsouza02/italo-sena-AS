@@ -1,22 +1,31 @@
 let flashcards = [];
 let virado = false;
 
+function iniciarTransicao() {
+  var container = document.getElementById('main-container');
+  container.setAttribute('transition-style', 'in:circle:center');
+}
+
+
 function iniciar() {
+  iniciarTransicao();
+  document.body.style.backgroundColor = "#003c66";
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container">
-      <button class="button" onclick="carregarConjunto()">INICIAR ESTUDO</button>
-      <button class="button" onclick="criarConjunto()">CRIAR FLASHCARDS</button>
-      <button class="button" onclick="voltar()">VOLTAR</button>
+      <button class="button2" onclick="carregarConjunto()">INICIAR ESTUDO</button2>
+      <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
+      <button class="button2" onclick="voltar()">VOLTAR</button2>
     </div>
   `;
 }
 
 function voltar() {
+  document.body.style.backgroundColor = "#4c88bd";
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="title">FLASHCARDS
-      <div class="subtitle">FRASE DE IMPACTO!</div>
+      <div class="subtitle">GALVÃO BUENO!</div>
     </div>
     <div class="line"></div>
     <button class="button" onclick="iniciar()">INICIAR</button>
@@ -24,15 +33,17 @@ function voltar() {
   `;
 }
 
+
 function sair() {
   window.close();
 }
 
 function carregarConjunto() {
-  // Implemente a lógica para carregar um conjunto existente
+  iniciarEstudos();
 }
 
 function criarConjunto() {
+  document.body.style.backgroundColor = "#4c88bd";
   renderFlashcards();
 }
 
@@ -44,6 +55,31 @@ function trocaPergunta(){
 
     virado = !virado
 }
+
+function iniciarEstudos() {
+  document.body.style.backgroundColor = "#4c88bd";
+  const container = document.querySelector('#main-container');
+  container.innerHTML = `
+  <div class="container">
+  <div class="score">ACERTOS:0/10</div>
+  <div class="flashcard-card" onclick="virarFlashcard()">
+    <div class="flashcard-inner">
+      <div class="flashcard-front">
+        <h2 class="pour">PERGUNTA</h2>
+        <h2>Flashcard}</h2>
+      </div>
+      <div class="flashcard-back">
+        <h2 class="pour">RESPOSTA</h2>
+        <h3> flashcard atual </h3>
+      </div>
+    </div>
+  </div>
+  <button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>
+  <button class="button" onclick="iniciar()">VOLTAR!</button>
+</div>
+`;
+}
+
 
 function renderFlashcards() {
   const container = document.querySelector('#main-container');
@@ -162,8 +198,11 @@ function criarFlashcard() {
       <div class="flashcard-edit-container">
         <h2>Criar Flashcard</h2>
         <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea>
-        <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea>
-        <div id="error-message" style="color: red;"></div>
+        <div class="input-group">
+          <input type= "text" name="text" class="input">
+          <label class= "label"> Resposta </label>
+          <div id="error-message" style="color: red;"></div>
+        </div>
         <div class="button-container">
           <button class="button" onclick="salvarNovoFlashcard()">SALVAR</button>
           <button class="button" onclick="criarConjunto()">CANCELAR</button>
