@@ -198,6 +198,7 @@ function criarFlashcard() {
       <div class="flashcard-edit-container">
         <h2>Criar Flashcard</h2>
         <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea>
+        <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea>
         <div class="input-group">
           <input type= "text" name="text" class="input">
           <label class= "label"> Resposta </label>
