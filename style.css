@@ -259,3 +259,15 @@ body {
 .button2:hover {
   transform: scale(1.1, 1.1);
 }
+
+.nomes-flashcards {
+  max-height: 370px; /* Defina a altura máxima desejada */
+  overflow-y: auto;  /* Habilita o scroll vertical */
+}
+
+
+
+.botoes-flashcards{
+  position:fixed;
+  bottom: 0;
+}
