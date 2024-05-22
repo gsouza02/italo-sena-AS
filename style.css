@@ -304,10 +304,8 @@
     position: relative;
   }
 
-  .input {
+  #new-pergunta, #new-resposta {
     border: solid 1.5px #fff;
-        resize: none;
-    opacity: 0.8;
     border-radius: 7px;
     background-color: #444;
     padding: 15px;
@@ -318,7 +316,7 @@
   .label {
     position: absolute;
     left: 15px;
-    color: #444;
+    color: #fff;
     pointer-events: none;
     transform: translateY(15px);
     font-size: 18px;
@@ -330,7 +328,7 @@
     border: 1.5px solid #fff;
   }
 
-  .input:focus ~ .label, input:valid ~ .label {
+  .input:focus ~ label, input:valid ~ label {
     transform: translateX(-10%) translateY(-50%) scale(0.9);
     background-color: #444;
     padding: 0 .2em;

@@ -1,3 +1,5 @@
+
+
 let flashcards = [];
 let virado = false;
 
@@ -95,7 +97,7 @@ function renderFlashcards() {
 
   let counterColor = flashcards.length >= 10 ? 'green' : 'red';
   let counterMessage = flashcards.length >= 10 ? '' : ' (Mínimo: 10)';
-  
+
   const counterHTML = `<div class="counter" style="color: ${counterColor}">${flashcards.length}/10${counterMessage}</div>`;
 
   container.innerHTML = `
@@ -149,7 +151,7 @@ function gerarPreviewHTML(index) {
   `;
 }
 
-function virarFlashcard(card) {  
+function virarFlashcard(card) {
   const text = document.querySelector('.pour')
   //text.textContent = text.textContent === 'PERGUNTA' ? 'RESPOSTA' : 'PERGUNTA'
   card.querySelector('.flashcard-inner').classList.toggle('is-flipped');
@@ -197,13 +199,17 @@ function criarFlashcard() {
     <div class="container sans-serif">
       <div class="flashcard-edit-container">
         <h2>Criar Flashcard</h2>
-        <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea>
-        <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea>
+       <!-- <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea> -->
+      <!-- <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea> -->
         <div class="input-group">
-          <input type= "text" name="text" class="input">
+          <input type= "text" name="text" id="new-pergunta" required>
+          <label class= "label"> Pergunta </label>
+          </div>
+        <div class="input-group">
+          <input type= "text" name="text" id="new-resposta" required>
           <label class= "label"> Resposta </label>
+          </div>
           <div id="error-message" style="color: red;"></div>
-        </div>
         <div class="button-container">
           <button class="button" onclick="salvarNovoFlashcard()">SALVAR</button>
           <button class="button" onclick="criarConjunto()">CANCELAR</button>
@@ -223,3 +229,4 @@ function salvarNovoFlashcard() {
   flashcards.push({ pergunta, resposta });
   criarConjunto();
 }
+
