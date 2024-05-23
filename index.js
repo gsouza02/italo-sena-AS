@@ -252,6 +252,7 @@ function salvarNovoFlashcard() {
 
   flashcards.push({ pergunta, resposta });
   criarConjunto();
+  mostrarPreview(flashcards.length - 1);
 }
 
 
