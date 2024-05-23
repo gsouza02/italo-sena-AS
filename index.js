@@ -61,7 +61,7 @@ function iniciarEstudos() {
   container.innerHTML = `
   <div class="container">
   <div class="score">ACERTOS:0/10</div>
-  <button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>
+  ${curPos !== 0 ? '<button class="button" onclick="flashcardAnterior()">ANTERIOR</button>' : ''}  
   <div class="flashcard-card" onclick="virarFlashcard(this)">
   <div class="flashcard-inner">
   <div class="flashcard-front">
@@ -74,7 +74,7 @@ function iniciarEstudos() {
   </div>
   </div>
   </div>
-  <button class="button" onclick="flashcardAnterior()">ANTERIOR</button>
+  ${curPos !== flashcards.length - 1 ? '<button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>' : ''} 
   <div>
   <input> </input>
   <button class="button" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
@@ -259,16 +259,12 @@ function salvarNovoFlashcard() {
 
 function proximoFlashcard() {
   if (curPos !== flashcards.length - 1) {curPos++;
-  /*const card = document.querySelector('.flashcard-inner');
-  card.innerHTML = gerarPreviewHTML(curPos);*/
   }
   iniciarEstudos()
 }
 
 function flashcardAnterior() {
   if (curPos !== 0) {curPos--;
- /* const card = document.querySelector('.flashcard-inner');
-  card.innerHTML = gerarPreviewHTML(curPos);*/
   }
   iniciarEstudos()
 }
