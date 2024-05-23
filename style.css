@@ -189,7 +189,7 @@
     width: 300px;
     height: 550px;
     perspective: 1000px;
-  }
+    }
 
   .flashcard-inner {
     width: 100%;
@@ -279,26 +279,11 @@
     bottom: 0;
   }
 
-  #new-pergunta{
-    background-color: #444;
-    border-color: #fff;
-    color: #fff;
-    resize: none;
-    opacity: 0.8;
-  }
 
   textarea::placeholder{
     color: #fff;
   }
 
-
-  #new-resposta{
-    background-color: #444;
-    border-color: #fff;
-    color: #fff;
-    resize: none;
-    opacity: 0.8;
-  }
 
   .input-group {
     position: relative;

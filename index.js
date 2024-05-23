@@ -1,7 +1,6 @@
-
-
 let flashcards = [];
 let virado = false;
+let curPos = 0
 
 function iniciarTransicao() {
   var container = document.getElementById('main-container');
@@ -10,12 +9,13 @@ function iniciarTransicao() {
 
 
 function iniciar() {
+  curPos = 0;
   iniciarTransicao();
   document.body.style.backgroundColor = "#003c66";
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container">
-      <button class="button2" onclick="carregarConjunto()">INICIAR ESTUDO</button2>
+      <button class="button2" onclick="iniciarEstudos()">INICIAR ESTUDO</button2>
       <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
       <button class="button2" onclick="voltar()">VOLTAR</button2>
     </div>
@@ -40,44 +40,37 @@ function sair() {
   window.close();
 }
 
-function carregarConjunto() {
-  iniciarEstudos();
-}
-
 function criarConjunto() {
   document.body.style.backgroundColor = "#4c88bd";
   renderFlashcards();
 }
 
-function trocaPergunta(){
-  if(!virado)
-     text = 'RESPOSTA' 
-  else
-    text = 'PERGUNTA'
-
-    virado = !virado
-}
-
 function iniciarEstudos() {
   document.body.style.backgroundColor = "#4c88bd";
   const container = document.querySelector('#main-container');
+
+  const flashcard = flashcards[curPos]
   container.innerHTML = `
   <div class="container">
   <div class="score">ACERTOS:0/10</div>
-  <div class="flashcard-card" onclick="virarFlashcard()">
-    <div class="flashcard-inner">
-      <div class="flashcard-front">
-        <h2 class="pour">PERGUNTA</h2>
-        <h2>Flashcard}</h2>
-      </div>
-      <div class="flashcard-back">
-        <h2 class="pour">RESPOSTA</h2>
-        <h3> flashcard atual </h3>
-      </div>
-    </div>
-  </div>
   <button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>
-  <button class="button" onclick="iniciar()">VOLTAR!</button>
+  <div class="flashcard-card" onclick="virarFlashcard(this)">
+  <div class="flashcard-inner">
+  <div class="flashcard-front">
+  <h2 class="pour">PERGUNTA</h2>
+  <h2>${flashcard.pergunta}</h2>
+  </div>
+  <div class="flashcard-back">
+  <h2 class="pour">RESPOSTA</h2>
+  <h3> ${flashcard.resposta} </h3>
+  </div>
+  </div>
+  </div>
+  <button class="button" onclick="flashcardAnterior()">ANTERIOR</button>
+  <div>
+  <input> </input>
+  <button class="button" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
+  </div>
 </div>
 `;
 }
@@ -125,8 +118,6 @@ function renderFlashcards() {
 }
 
 function mostrarPreview(index) {
-  const text = document.querySelector('.pour')
-  text.textContent = 'PERGUNTA'
   const previewContainer = document.querySelector('.flashcard-preview');
   previewContainer.innerHTML = gerarPreviewHTML(index);
 }
@@ -152,8 +143,6 @@ function gerarPreviewHTML(index) {
 }
 
 function virarFlashcard(card) {
-  const text = document.querySelector('.pour')
-  //text.textContent = text.textContent === 'PERGUNTA' ? 'RESPOSTA' : 'PERGUNTA'
   card.querySelector('.flashcard-inner').classList.toggle('is-flipped');
 }
 
@@ -230,3 +219,19 @@ function salvarNovoFlashcard() {
   criarConjunto();
 }
 
+
+function proximoFlashcard() {
+  if (curPos !== flashcards.length - 1) {curPos++;
+  /*const card = document.querySelector('.flashcard-inner');
+  card.innerHTML = gerarPreviewHTML(curPos);*/
+  }
+  iniciarEstudos()
+}
+
+function flashcardAnterior() {
+  if (curPos !== 0) {curPos--;
+ /* const card = document.querySelector('.flashcard-inner');
+  card.innerHTML = gerarPreviewHTML(curPos);*/
+  }
+  iniciarEstudos()
+}
