@@ -334,3 +334,13 @@
     padding: 0 .2em;
     color: #fff;
   }
+
+  .min10f {
+    font-size: 35px;
+    color: #e0f2ff;
+    margin-bottom: 10px;
+    margin-top: 2px; /* Ajuste este valor conforme necessário */
+    position: relative;
+    display: inline-block;
+    text-shadow: 4px 4px 4px black;
+  }
