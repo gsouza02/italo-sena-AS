@@ -75,6 +75,14 @@
     margin: 0 auto 40px auto;
   }
 
+  .line2 {
+    width: 70%;
+    height: 3px;
+    background-color: #e0f2ff;
+    text-shadow: 2px 2px 2px black;
+    margin: 0 auto 40px auto;
+  }
+
   .button {
     display: block;
     background-color: #4c88bd;
@@ -103,7 +111,20 @@
     width: 300px;
   }
 
+  .button3 {
+    display: block;
+    background-color: #444;
+    border: 2px solid #e0f2ff;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #e0f2ff;
+    font-size: 22px;
+    cursor: pointer;
+    margin: 10px auto;
+    width: 300px;
 
+  }
 
   .flashcard-container {
     display: flex;
@@ -207,6 +228,7 @@
 
   .flashcard-front,
   .flashcard-back {
+    font-family: sans-serif;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -258,7 +280,6 @@
   }
 
 
-
   .button:hover {
     transform: scale(1.1, 1.1);
   }
@@ -266,6 +287,11 @@
   .button2:hover {
     transform: scale(1.1, 1.1);
   }
+
+  .button3:hover {
+    transform: scale(1.1, 1.1);
+  }
+
 
   .nomes-flashcards {
     max-height: 370px; /* Defina a altura máxima desejada */
@@ -310,7 +336,22 @@
     background-color: #444;
     padding: 15px;
     font-size: 18px;
-    color: #e0f2ff;
+    border-radius: 10px;
+    color: white;
+    width: 650px;
+    margin-bottom: 20px;
+  }
+
+  #edit-pergunta, #edit-resposta{
+    border: solid 1.5px #fff;
+    border-radius: 7px;
+    background-color: #444;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    color: white;
+    width: 650px;
+    margin-bottom: 20px;
   }
 
   .label {
