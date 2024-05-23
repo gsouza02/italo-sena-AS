@@ -49,6 +49,15 @@ function iniciarEstudos() {
   const container = document.querySelector('#main-container');
 
   const flashcard = flashcards[curPos]
+  if (flashcards.length < 2) {
+    container.innerHTML = `
+      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
+      <div class="line"></div>
+      <button class="button2" onclick ="criarConjunto()">CRIE SEUS FLASHCARDS</button>
+      <button class="button2" onclick="iniciar()">VOLTAR!</button>
+      `;
+    return;
+  }
   container.innerHTML = `
   <div class="container">
   <div class="score">ACERTOS:0/10</div>
@@ -72,37 +81,8 @@ function iniciarEstudos() {
   </div>
 </div>
 `;
+
 }
-  
-  if (flashcards.length < 10) {
-    container.innerHTML = `
-      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
-      <div class="line"></div>
-      <button class="button" onclick="iniciar()">VOLTAR!</button>
-      `;
-    return;
-  }
-    document.body.style.backgroundColor = "#4c88bd";
-    container.innerHTML = `
-    <div class="container">
-    <div class="score">ACERTOS:0/10</div>
-    <div class="flashcard-card" onclick="virarFlashcard()">
-      <div class="flashcard-inner">
-        <div class="flashcard-front">
-          <h2 class="pour">PERGUNTA</h2>
-          <h2>Flashcard}</h2>
-        </div>
-        <div class="flashcard-back">
-          <h2 class="pour">RESPOSTA</h2>
-          <h3> flashcard atual </h3>
-        </div>
-      </div>
-    </div>
-    <button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>
-    <button class="button" onclick="iniciar()">VOLTAR!</button>
-  </div>
-  `;
-  }
 
 
 function renderFlashcards() {

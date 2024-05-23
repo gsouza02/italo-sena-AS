@@ -328,4 +328,5 @@
     position: relative;
     display: inline-block;
     text-shadow: 4px 4px 4px black;
+    font-family: 'sans-serif';
   }
