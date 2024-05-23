@@ -158,19 +158,26 @@ function virarFlashcard(card) {
 }
 
 function editarFlashcard(index) {
+  document.body.style.backgroundColor = "#444";
   const flashcard = flashcards[index];
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container sans-serif">
       <div class="flashcard-edit-container">
         <h2>Editar Flashcard</h2>
-        <textarea id="edit-pergunta" rows="2" cols="75">${flashcard.pergunta}</textarea>
-        <textarea id="edit-resposta" rows="2" cols="75">${flashcard.resposta}</textarea>
+        <div class="line2"></div>
+        <div class="input-group">
+          <input type="text" name="text" id="edit-pergunta" value="${flashcard.pergunta}" required>
+          <label class="label" for="edit-pergunta">Pergunta</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="edit-resposta" value="${flashcard.resposta}" required>
+          <label class="label" for="edit-resposta">Resposta</label>
+        </div>
         <div id="error-message" style="color: red;"></div>
         <div class="button-container">
-        <div class="button-container">
-          <button class="button" onclick="salvarEdicao(${index})">SALVAR</button>
-          <button class="button" onclick="criarConjunto()">CANCELAR</button>
+          <button class="button3" onclick="salvarEdicao(${index})">SALVAR</button>
+          <button class="button3" onclick="criarConjunto()">CANCELAR</button>
         </div>
       </div>
     </div>
@@ -180,12 +187,21 @@ function editarFlashcard(index) {
 function salvarEdicao(index) {
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
+  const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+
   if (pergunta === '' || resposta === '') {
     document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
     return;
   }
+
+ if (perguntaExistente) {
+    document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
+    return;
+  }
+
   flashcards[index] = { pergunta, resposta };
   criarConjunto();
+  mostrarPreview(index); 
 }
 
 function excluirFlashcard(index) {
@@ -194,13 +210,13 @@ function excluirFlashcard(index) {
 }
 
 function criarFlashcard() {
+  document.body.style.backgroundColor = "#444";
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container sans-serif">
       <div class="flashcard-edit-container">
         <h2>Criar Flashcard</h2>
-       <!-- <textarea id="new-pergunta" placeholder="Pergunta" rows="2" cols="75"></textarea> -->
-      <!-- <textarea id="new-resposta" placeholder="Resposta" rows="2" cols="75"></textarea> -->
+        <div class="line2"></div>
         <div class="input-group">
           <input type= "text" name="text" id="new-pergunta" required>
           <label class= "label"> Pergunta </label>
@@ -211,8 +227,8 @@ function criarFlashcard() {
           </div>
           <div id="error-message" style="color: red;"></div>
         <div class="button-container">
-          <button class="button" onclick="salvarNovoFlashcard()">SALVAR</button>
-          <button class="button" onclick="criarConjunto()">CANCELAR</button>
+          <button class="button3" onclick="salvarNovoFlashcard()">SALVAR</button>
+          <button class="button3" onclick="criarConjunto()">CANCELAR</button>
         </div>
       </div>
     </div>
@@ -222,11 +238,23 @@ function criarFlashcard() {
 function salvarNovoFlashcard() {
   const pergunta = document.querySelector('#new-pergunta').value.trim();
   const resposta = document.querySelector('#new-resposta').value.trim();
+  
+  // Verificar se já existe um flashcard com a mesma pergunta
+  const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+
   if (pergunta === '' || resposta === '') {
     document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
     return;
   }
+
+  if (perguntaExistente) {
+    document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
+    return;
+  }
+
   flashcards.push({ pergunta, resposta });
   criarConjunto();
+  mostrarPreview(flashcards.length - 1);
 }
+
 
