@@ -1,5 +1,3 @@
-let virado = false;
-
 function iniciarTransicao() {
   var container = document.getElementById('main-container');
   container.setAttribute('transition-style', 'in:circle:center');
@@ -207,6 +205,7 @@ function salvarNovoFlashcard() {
     document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
     return;
   }
+  
   const caixa = 1;
   flashcards.push({ pergunta, resposta , caixa});
   caixa1.push({pergunta, resposta, caixa})

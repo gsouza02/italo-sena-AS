@@ -31,7 +31,7 @@ function mostrarFlashCard(card) {
       ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="sorteio()">&#9654;</button>' : '<div class="placeholder"></div>'}
     </div>
     <div class="input-container"> <!-- Adicionando o contêiner -->
-      <input type="text" placeholder="Digite sua resposta aqui" />
+      <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
       <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
   </div>
@@ -125,16 +125,18 @@ function verificaResposta() {
 
 function sorteio(){
  let caixa = sortearCaixa()
-
+ let index = -1
 
  if(caixa === 3){
-  mostrarFlashCard(caixa3[sortearCaixa3()])
+  index = sortearCaixa3();
+  mostrarFlashCard(caixa3[index])
  } else if(caixa === 2){
-    mostrarFlashCard(caixa2[sortearCaixa2()])
-
+  index = sortearCaixa2()
+  mostrarFlashCard(caixa2[index])
  }
  else if(caixa === 1){
-     mostrarFlashCard(caixa1[sortearCaixa1()])
+  index = sortearCaixa1()
+  mostrarFlashCard(caixa1[index])
  }
 
 }
