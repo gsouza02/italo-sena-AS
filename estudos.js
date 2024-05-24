@@ -30,16 +30,15 @@ function mostrarFlashCard(card) {
       </div>
       ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="sorteio()">&#9654;</button>' : '<div class="placeholder"></div>'}
     </div>
-    <div class="input-container"> <!-- Adicionando o contêiner -->
-      <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
-    </div>
+   <div class="input-container">
+    <input type="text" placeholder="Digite sua resposta aqui" />
+    <button class="send-icon" onclick="enviarResposta()">&#9654;</button>
+    <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
+  </div>
   </div>
 `;
 
 }
-
-
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -138,5 +137,6 @@ function sorteio(){
   index = sortearCaixa1()
   mostrarFlashCard(caixa1[index])
  }
+
 
 }
