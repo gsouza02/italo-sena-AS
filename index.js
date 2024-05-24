@@ -46,46 +46,50 @@ function criarConjunto() {
 }
 
 function iniciarEstudos() {
+  caixa1 = [...flashcards]
   const container = document.querySelector('#main-container');
 
   const flashcard = flashcards[curPos];
-  if (flashcards.length < 2) {
+
+
+  if (caixa1.length < 2) {
     container.innerHTML = `
-      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
-      <div class="line"></div>
-      <button class="button2" onclick="criarConjunto()">CRIE SEUS FLASHCARDS</button>
-      <button class="button2" onclick="iniciar()">VOLTAR!</button>
-    `;
+        <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
+        <div class="line"></div>
+        <button class="button2" onclick ="criarConjunto()">CRIE SEUS FLASHCARDS</button>
+        <button class="button2" onclick="iniciar()">VOLTAR!</button>
+        `;
     return;
   }
   container.innerHTML = `
-  <div class="container">
+    <div class="container">
     <div class="score">ACERTOS:0/10</div>
-    <div class="flashcard-container">
-      ${curPos !== 0 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
-      
-      <div class="flashcard-card" onclick="virarFlashcard(this)">
-        <div class="flashcard-inner">
-          <div class="flashcard-front">
-            <h2 class="pour">PERGUNTA</h2>
-            <h2>${flashcard.pergunta}</h2>
-          </div>
-          <div class="flashcard-back">
-            <h2 class="pour">RESPOSTA</h2>
-            <h3>${flashcard.resposta}</h3>
-          </div>
-        </div>
-      </div>
-      ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="proximoFlashcard()">&#9654;</button>' : '<div class="placeholder"></div>'}
+    ${curPos !== 0 ? '<button class="button" onclick="flashcardAnterior()">ANTERIOR</button>' : ''}  
+    <div class="flashcard-card" onclick="virarFlashcard(this)">
+    <div class="flashcard-inner">
+    <div class="flashcard-front">
+    <h2 class="pour">PERGUNTA</h2>
+    <h2>${flashcard.pergunta}</h2>
     </div>
-    <div class="input-container"> <!-- Adicionando o contêiner -->
-      <input type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button2" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
+    <div class="flashcard-back">
+    <h2 class="pour">RESPOSTA</h2>
+    <h3> ${flashcard.resposta} </h3>
+    </div>
+    </div>
+    </div>
+    ${curPos !== flashcards.length - 1 ? '<button class="button" onclick="sorteio()">PRÓXIMO</button>' : ''} 
+    <div>
+    <div class="respostas">
+    <input> </input>
+    <button class="button">✔️</button>
+    </div>
+    <button class="button" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
     </div>
   </div>
-`;
+  `;
 
 }
+
 
 function renderFlashcards() {
   const container = document.querySelector('#main-container');
