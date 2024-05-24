@@ -11,7 +11,7 @@ function iniciar() {
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container">
-      <button class="button2" onclick="iniciarEstudos()">INICIAR ESTUDO</button2>
+      <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button2>
       <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
       <button class="button2" onclick="voltar()">VOLTAR</button2>
     </div>
@@ -139,6 +139,11 @@ function editarFlashcard(index) {
 }
 
 function salvarEdicao(index) {
+  const card = flashcards[index];
+  const perguntaCard = card.pergunta;
+  const box = card.caixa
+
+
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
   const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
@@ -148,15 +153,47 @@ function salvarEdicao(index) {
     return;
   }
 
-  flashcards[index] = { pergunta, resposta };
+
+  let i = 0;
+  if (box === 1) {
+    while(caixa1[i].pergunta != perguntaCard) i++;
+    caixa1[i] = { pergunta, resposta, box };
+  } else if (box === 2) {
+    while(caixa2[i].pergunta != perguntaCard) i++;
+    caixa2[i] = { pergunta, resposta, box };
+  } else {
+    while(caixa3[i].pergunta != perguntaCard) i++;
+    caixa3[i] = { pergunta, resposta, box };
+  }
+
+  
+  flashcards[index] = { pergunta, resposta, box };
+
+
   criarConjunto();
   mostrarPreview(index); 
 }
 
 function excluirFlashcard(index) {
+  const card = flashcards[index];
+  const perguntaCard = card.pergunta;
+
+  let i = 0;
+  if (card.caixa === 1) {
+    while(caixa1[i].pergunta != perguntaCard) i++;
+    caixa1.splice(i, 1)
+  } else if (card.caixa === 2) {
+    while(caixa2[i].pergunta != perguntaCard) i++;
+    caixa2.splice(i, 1)
+  } else {
+    while(caixa3[i].pergunta != perguntaCard) i++;
+    caixa3.splice(i, 1)
+  }
+
   flashcards.splice(index, 1);
   criarConjunto();
 }
+
 
 function criarFlashcard() {
   document.body.style.backgroundColor = "#444";
@@ -200,10 +237,10 @@ function salvarNovoFlashcard() {
     document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
     return;
   }
-
-  const caixa = 1
-  flashcards.push({ pergunta, resposta, caixa });
-  caixa1.push({ pergunta, resposta, caixa })
+  
+  const caixa = 1;
+  flashcards.push({ pergunta, resposta , caixa});
+  caixa1.push({pergunta, resposta, caixa})
   criarConjunto();
   mostrarPreview(flashcards.length - 1);
 }

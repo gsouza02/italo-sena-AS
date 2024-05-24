@@ -138,6 +138,7 @@
   .flashcard-preview,
   .flashcard-edit {
     background-color: #444;
+    
     border-radius: 10px;
     padding: 20px;
     color: #e0f2ff;
@@ -210,6 +211,9 @@
     width: 300px;
     height: 550px;
     perspective: 1000px;
+    display: flex; /* Adicionamos isso para alinhar o conteúdo do flashcard ao centro */
+    justify-content: center; /* Centralizamos horizontalmente o conteúdo do flashcard */
+  align-items: center; 
     }
 
   .flashcard-inner {
@@ -228,6 +232,7 @@
 
   .flashcard-front,
   .flashcard-back {
+    border: 7px solid #e0f2ff;
     font-family: sans-serif;
     position: absolute;
     width: 100%;
@@ -374,6 +379,10 @@
 
   .container {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
   }
   
   .flashcard-container {
@@ -411,11 +420,12 @@
   }
   
   .button4 {
-    background-color: #003c66;
-    border: 2px solid #e0f2ff;
+    background-color: #444;
+    border: 3px solid #e0f2ff;
     border-radius: 20px;
     font-weight: bold;
     padding: 10px 20px;
+    margin-left: 30px; 
     color: #e0f2ff;
     font-size: 22px;
     cursor: pointer;
@@ -425,6 +435,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    right: -20px;
+    position: relative;
   }
   
   .button:hover {
@@ -438,13 +450,13 @@
   }
   
   input[type="text"] {
-    border: solid 1.5px #fff;
+    border: solid 3px #fff;
     border-radius: 7px;
     background-color: #444;
     padding: 15px;
     font-size: 18px;
     color: white;
-    width: 300px;
+    width: 400px;
     margin-bottom: 20px;
     border-radius: 20px;
   }
@@ -454,12 +466,62 @@
     color: #e0f2ff;
     margin-bottom: 20px;
   }
-
-  .input-container {
-    margin-top: 20px; /* Adicione a margem superior desejada */
+  .input-container .send-icon {
+    background-color: #444;
+    margin-top: 60px; /* Adicione a margem superior desejada */
+    font-size: 28px;
+    color: #e0f2ff;
+    cursor: pointer;
+    margin-left: 20px; /* Ajuste conforme necessário */
+    border: solid 3px #e0f2ff; /* Adiciona a mesma borda da entrada */
+    border-radius: 20px;
+    width: 50px; /* Ajuste a largura conforme necessário */
+    height: 50px;
   }
-  
+
+  .input-container .button2 {
+    background-color: #444;
+    border: 3px solid #e0f2ff;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #e0f2ff;
+    font-size: 22px;
+    cursor: pointer;
+    width: auto;
+    margin: 10px auto; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .flashcard-front h2,
 .flashcard-back h3 {
   color: white;
+}
+
+.send-icon {
+  font-size: 18px;
+  color: #e0f2ff;
+  cursor: pointer;
+  margin-left: 10px; /* Ajuste conforme necessário */
+}
+
+
+  .flashcard-front h2,
+.flashcard-back h3 {
+  color: white;
+}
+
+.input-container input {
+
+  border: solid 3px #e0f2ff;
+  border-radius: 7px;
+  background-color: #444;
+  padding: 15px;
+  font-size: 18px;
+  color: white;
+  width: 400px;
+  margin-bottom: 20px;
+  border-radius: 20px;
 }

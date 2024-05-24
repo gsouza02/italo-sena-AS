@@ -1,52 +1,3 @@
-let index = -1
-
-
-function iniciarEstudos() {
-  caixa = 1
-  index = 0
-
-  const container = document.querySelector('#main-container');
-
-  const flashcard = flashcards[curPos];
-  if (flashcards.length < 2) {
-    container.innerHTML = `
-      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
-      <div class="line"></div>
-      <button class="button2" onclick="criarConjunto()">CRIE SEUS FLASHCARDS</button>
-      <button class="button2" onclick="iniciar()">VOLTAR!</button>
-    `;
-    return;
-  }
-  container.innerHTML = `
-  <div class="container">
-    <div class="flashcard-container">
-      ${curPos !== 0 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
-      
-      <div class="flashcard-card" onclick="virarFlashcard(this)">
-        <div class="flashcard-inner">
-          <div class="flashcard-front">
-            <h2 class="pour">PERGUNTA</h2>
-            <h2>${flashcard.pergunta}</h2>
-            <h3>CAIXA:${flashcard.caixa}</h3>
-          </div>
-          <div class="flashcard-back">
-            <h2 class="pour">RESPOSTA</h2>
-            <h3>${flashcard.resposta}</h3>
-          </div>
-        </div>
-      </div>
-      ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="sorteio()">&#9654;</button>' : '<div class="placeholder"></div>'}
-    </div>
-    <div class="input-container"> <!-- Adicionando o contêiner -->
-      <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button" onclick="verificaResposta(index)">TESTE</button>
-      <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
-    </div>
-  </div>
-`;
-
-}
-
 function mostrarFlashCard(card) {
   const container = document.querySelector('#main-container');
 
@@ -80,17 +31,15 @@ function mostrarFlashCard(card) {
       </div>
       ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="sorteio()">&#9654;</button>' : '<div class="placeholder"></div>'}
     </div>
-    <div class="input-container"> <!-- Adicionando o contêiner -->
-      <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button" onclick="verificaResposta(index)">TESTE</button>
-      <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
+   <div class="input-container">
+    <input type="text" placeholder="Digite sua resposta aqui" />
+    <button class="send-icon" onclick="verificarResposta()">&#9654;</button>
+    <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
-  </div>
+    </div>
 `;
 
 }
-
-
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -186,31 +135,21 @@ function verificaResposta(index) {
 sorteio()
 }
 
-function sorteio() {
-  const resposta = document.querySelector('#resposta-usuario').value;
-  const perguntatual = ""
-  
-  caixa = sortearCaixa()
+function sorteio(){
+ let caixa = sortearCaixa()
+ let index = -1
 
-  if (caixa === 3) {
-    index = sortearCaixa3();
-    mostrarFlashCard(caixa3[index])
-  } 
-  else if (caixa === 2) {
-    index = sortearCaixa2()
-    //if(perguntatual === caixa2[index].pergunta) sorteio();
-     mostrarFlashCard(caixa2[index])
-  }
-  else if (caixa === 1) {
-    index = sortearCaixa1()
-    //if(perguntatual === caixa1[index].pergunta) sorteio();
-     mostrarFlashCard(caixa1[index])
-  }
-
-}
+ if(caixa === 3){
+  index = sortearCaixa3();
+  mostrarFlashCard(caixa3[index])
+ } else if(caixa === 2){
+  index = sortearCaixa2()
+  mostrarFlashCard(caixa2[index])
+ }
+ else if(caixa === 1){
+  index = sortearCaixa1()
+  mostrarFlashCard(caixa1[index])
+ }
 
 
-function flashcardAnterior() {
-  curPos--;
-  iniciarEstudos()
 }
