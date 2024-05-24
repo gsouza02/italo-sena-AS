@@ -459,3 +459,7 @@
     margin-top: 20px; /* Adicione a margem superior desejada */
   }
   
+  .flashcard-front h2,
+.flashcard-back h3 {
+  color: white;
+}
