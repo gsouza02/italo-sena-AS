@@ -14,7 +14,6 @@ function iniciarEstudos() {
   }
   container.innerHTML = `
   <div class="container">
-    <div class="score">ACERTOS:0/10</div>
     <div class="flashcard-container">
       ${curPos !== 0 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
       
@@ -34,7 +33,7 @@ function iniciarEstudos() {
     </div>
     <div class="input-container"> <!-- Adicionando o contêiner -->
       <input type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button2" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
+      <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
   </div>
 `;
@@ -56,7 +55,6 @@ function mostrarFlashCard(card) {
   }
   container.innerHTML = `
   <div class="container">
-    <div class="score">ACERTOS:0/10</div>
     <div class="flashcard-container">
       ${curPos !== 0 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
       
@@ -76,7 +74,7 @@ function mostrarFlashCard(card) {
     </div>
     <div class="input-container"> <!-- Adicionando o contêiner -->
       <input type="text" placeholder="Digite sua resposta aqui" />
-      <button class="button2" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
+      <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
   </div>
 `;

@@ -150,11 +150,6 @@ function salvarEdicao(index) {
     return;
   }
 
- if (perguntaExistente) {
-    document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
-    return;
-  }
-
   flashcards[index] = { pergunta, resposta };
   criarConjunto();
   mostrarPreview(index); 
