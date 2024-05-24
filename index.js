@@ -13,7 +13,7 @@ function iniciar() {
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="container">
-      <button class="button2" onclick="iniciarEstudos()">INICIAR ESTUDO</button2>
+      <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button2>
       <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
       <button class="button2" onclick="voltar()">VOLTAR</button2>
     </div>
@@ -156,6 +156,11 @@ function salvarEdicao(index) {
 }
 
 function excluirFlashcard(index) {
+  const card = flashcards[index]
+ //const card = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+  if(card.caixa === 1) caixa1.find
+  else if(card.caixa === 2) caixa2
+  else caixa3
   flashcards.splice(index, 1);
   criarConjunto();
 }
@@ -204,6 +209,7 @@ function salvarNovoFlashcard() {
   }
   const caixa = 1;
   flashcards.push({ pergunta, resposta , caixa});
+  caixa1.push({pergunta, resposta, caixa})
   criarConjunto();
   mostrarPreview(flashcards.length - 1);
 }
