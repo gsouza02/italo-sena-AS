@@ -8,3 +8,4 @@ let flashcardsCorretos = [];
 let curPos1 = 0
 let curPos2 = 0
 let curPos3 = 0
+let caixa = -1;

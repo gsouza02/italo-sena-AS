@@ -1,5 +1,10 @@
+let index = -1
+
+
 function iniciarEstudos() {
-  caixa1 = [...flashcards]
+  caixa = 1
+  index = 0
+
   const container = document.querySelector('#main-container');
 
   const flashcard = flashcards[curPos];
@@ -22,6 +27,7 @@ function iniciarEstudos() {
           <div class="flashcard-front">
             <h2 class="pour">PERGUNTA</h2>
             <h2>${flashcard.pergunta}</h2>
+            <h3>CAIXA:${flashcard.caixa}</h3>
           </div>
           <div class="flashcard-back">
             <h2 class="pour">RESPOSTA</h2>
@@ -33,6 +39,7 @@ function iniciarEstudos() {
     </div>
     <div class="input-container"> <!-- Adicionando o contêiner -->
       <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
+      <button class="button" onclick="verificaResposta(index)">TESTE</button>
       <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
   </div>
@@ -63,6 +70,7 @@ function mostrarFlashCard(card) {
           <div class="flashcard-front">
             <h2 class="pour">PERGUNTA</h2>
             <h2>${card.pergunta}</h2>
+            <h2>CAIXA:${card.caixa}</h2>
           </div>
           <div class="flashcard-back">
             <h2 class="pour">RESPOSTA</h2>
@@ -74,6 +82,7 @@ function mostrarFlashCard(card) {
     </div>
     <div class="input-container"> <!-- Adicionando o contêiner -->
       <input id="resposta-usuario" type="text" placeholder="Digite sua resposta aqui" />
+      <button class="button" onclick="verificaResposta(index)">TESTE</button>
       <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
   </div>
@@ -89,48 +98,44 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function sortearCaixa(){
- let sorteio =  getRandomInt(1, 101)
+function sortearCaixa() {
+  let sorteio = getRandomInt(1, 101)
 
-let res = 0;
-let result = 0;
+  let res = 0;
+  let result = 0;
 
- if (sorteio > 50) {
-  res = 1
-} else if (sorteio > 20) {
-  res = 2
-} else {
-  res = 3
-}
+  if (sorteio > 50) {
+    res = 1
+  } else if (sorteio > 20) {
+    res = 2
+  } else {
+    res = 3
+  }
 
 
-if(res === 3){ //res resultado do sorteio anterior, result resultado do sortei apos as verificacoes
-  if(caixa3.length === 0){
-      if(caixa2.length !== 0) result = 2;
+  if (res === 3) { //res resultado do sorteio anterior, result resultado do sortei apos as verificacoes
+    if (caixa3.length === 0) {
+      if (caixa2.length !== 0) result = 2;
       else result = 1;
-  }
-  else result = 3;
-}
-else if(res === 2){
-  if(caixa2.length === 0){
-    if(caixa1.length !== 0) result = 1;
+    }
     else result = 3;
-}
-else result = 2;
-}
-else{
-  if(caixa1.length === 0){
-    if(caixa2.length !== 0) result = 2;
-    else  result = 3;
   }
-  else result = 1;
-}
+  else if (res === 2) {
+    if (caixa2.length === 0) {
+      if (caixa1.length !== 0) result = 1;
+      else result = 3;
+    }
+    else result = 2;
+  }
+  else {
+    if (caixa1.length === 0) {
+      if (caixa2.length !== 0) result = 2;
+      else result = 3;
+    }
+    else result = 1;
+  }
 
-return result;
-}
-
-function sortearCard() {
-  return Math.random % flashcards.length
+  return result;
 }
 
 function sortearCaixa1() {
@@ -140,46 +145,67 @@ function sortearCaixa1() {
 
 
 function sortearCaixa2() {
-  return Math.random % caixa2.length
+  const indiceAleatorio = Math.floor(Math.random() * caixa2.length);
+  return indiceAleatorio;
 }
 
 function sortearCaixa3() {
-  return Math.random % caixa3.length
+  const indiceAleatorio = Math.floor(Math.random() * caixa3.length);
+  return indiceAleatorio;
 }
 
 
-function verificaResposta() {
-  if (resposta === '') return;
+function verificaResposta(index) {
+  const resposta = document.querySelector('#resposta-usuario').value;
 
-  else if (resposta === certa) {
-
-    if (flashcards[curPos].caixa === 1) flashcards[curPos].caixa = 2
-    else if (flashcards[curPos].caixa === 2) flashcards[curPos].caixa = 3
-
+  if(caixa === 1) {
+    if(resposta === caixa1[index].resposta){
+      caixa1[index].caixa = 2
+      caixa2.push(caixa1[index])
+      caixa1.splice(index, 1)
+    }
+  }
+  else if (caixa === 2){
+    if(resposta === caixa2[index].resposta){
+      caixa2[index].caixa = 3
+      caixa3.push(caixa2[index])
+    }
+    else{
+      caixa2[index].caixa = 1
+      caixa1.push(caixa2[index])
+    }
+    caixa2.splice(index, 1)
   }
   else{
-    if (flashcards[curPos].caixa === 2) flashcards[curPos].caixa = 1
-    else if (flashcards[curPos].caixa === 3) flashcards[curPos].caixa = 2
-
+    if(resposta !== caixa3[index].resposta){
+      caixa3[index].caixa = 2
+      caixa2.push(caixa3[index])
+      caixa3.splice(index, 1)
   }
 }
+sorteio()
+}
 
+function sorteio() {
+  const resposta = document.querySelector('#resposta-usuario').value;
+  const perguntatual = ""
+  
+  caixa = sortearCaixa()
 
-function sorteio(){
- let caixa = sortearCaixa()
- let index = -1
-
- if(caixa === 3){
-  index = sortearCaixa3();
-  mostrarFlashCard(caixa3[index])
- } else if(caixa === 2){
-  index = sortearCaixa2()
-  mostrarFlashCard(caixa2[index])
- }
- else if(caixa === 1){
-  index = sortearCaixa1()
-  mostrarFlashCard(caixa1[index])
- }
+  if (caixa === 3) {
+    index = sortearCaixa3();
+    mostrarFlashCard(caixa3[index])
+  } 
+  else if (caixa === 2) {
+    index = sortearCaixa2()
+    //if(perguntatual === caixa2[index].pergunta) sorteio();
+     mostrarFlashCard(caixa2[index])
+  }
+  else if (caixa === 1) {
+    index = sortearCaixa1()
+    //if(perguntatual === caixa1[index].pergunta) sorteio();
+     mostrarFlashCard(caixa1[index])
+  }
 
 }
 
