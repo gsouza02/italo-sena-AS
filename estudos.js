@@ -1,7 +1,19 @@
 function mostrarFlashCard(card) {
   const container = document.querySelector('#main-container');
+  const perguntaCard = card.pergunta;
 
-  const flashcard = flashcards[curPos];
+  let index = 0;
+  while(flashcards[index].pergunta !== perguntaCard) index++;
+
+  let i = 0;
+  if (card.caixa === 1) {
+    while(caixa1[i].pergunta !== perguntaCard) i++;
+  } else if (card.caixa === 2) {
+    while(caixa2[i].pergunta !== perguntaCard) i++;
+  } else {
+    while(caixa3[i].pergunta !== perguntaCard) i++;
+  }
+
   if (flashcards.length < 2) {
     container.innerHTML = `
       <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
@@ -21,7 +33,7 @@ function mostrarFlashCard(card) {
           <div class="flashcard-front">
             <h2 class="pour">PERGUNTA</h2>
             <h2>${card.pergunta}</h2>
-            <h2>CAIXA:${card.caixa}</h2>
+            <h3>CAIXA:${card.caixa}</h3>
           </div>
           <div class="flashcard-back">
             <h2 class="pour">RESPOSTA</h2>
@@ -32,8 +44,8 @@ function mostrarFlashCard(card) {
       ${curPos !== flashcards.length - 1 ? '<button class="button4" onclick="sorteio()">&#9654;</button>' : '<div class="placeholder"></div>'}
     </div>
    <div class="input-container">
-    <input type="text" placeholder="Digite sua resposta aqui" />
-    <button class="send-icon" onclick="verificarResposta()">&#9654;</button>
+    <input type="text" id="resposta-usuario" placeholder="Digite sua resposta aqui" />
+    <button class="send-icon" onclick="verificaResposta(${i}, ${card.caixa}, ${index})">&#9654;</button>
     <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
     </div>
     </div>
@@ -60,7 +72,6 @@ function sortearCaixa() {
   } else {
     res = 3
   }
-
 
   if (res === 3) { //res resultado do sorteio anterior, result resultado do sortei apos as verificacoes
     if (caixa3.length === 0) {
@@ -104,11 +115,12 @@ function sortearCaixa3() {
 }
 
 
-function verificaResposta(index) {
+function verificaResposta(index, caixa, flashcardIndex) {
   const resposta = document.querySelector('#resposta-usuario').value;
 
   if(caixa === 1) {
     if(resposta === caixa1[index].resposta){
+      flashcards[flashcardIndex].caixa = 2
       caixa1[index].caixa = 2
       caixa2.push(caixa1[index])
       caixa1.splice(index, 1)
@@ -116,10 +128,12 @@ function verificaResposta(index) {
   }
   else if (caixa === 2){
     if(resposta === caixa2[index].resposta){
+      flashcards[flashcardIndex].caixa = 3
       caixa2[index].caixa = 3
       caixa3.push(caixa2[index])
     }
     else{
+      flashcards[flashcardIndex].caixa = 1
       caixa2[index].caixa = 1
       caixa1.push(caixa2[index])
     }
@@ -127,6 +141,7 @@ function verificaResposta(index) {
   }
   else{
     if(resposta !== caixa3[index].resposta){
+      flashcards[flashcardIndex].caixa = 2
       caixa3[index].caixa = 2
       caixa2.push(caixa3[index])
       caixa3.splice(index, 1)

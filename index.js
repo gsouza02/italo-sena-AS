@@ -141,12 +141,11 @@ function editarFlashcard(index) {
 function salvarEdicao(index) {
   const card = flashcards[index];
   const perguntaCard = card.pergunta;
-  const box = card.caixa
+  const caixa = card.caixa
 
 
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
-  const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
 
   if (pergunta === '' || resposta === '') {
     document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
@@ -155,19 +154,19 @@ function salvarEdicao(index) {
 
 
   let i = 0;
-  if (box === 1) {
+  if (caixa === 1) {
     while(caixa1[i].pergunta != perguntaCard) i++;
-    caixa1[i] = { pergunta, resposta, box };
-  } else if (box === 2) {
+    caixa1[i] = { pergunta, resposta, caixa };
+  } else if (caixa === 2) {
     while(caixa2[i].pergunta != perguntaCard) i++;
-    caixa2[i] = { pergunta, resposta, box };
+    caixa2[i] = { pergunta, resposta, caixa };
   } else {
     while(caixa3[i].pergunta != perguntaCard) i++;
-    caixa3[i] = { pergunta, resposta, box };
+    caixa3[i] = { pergunta, resposta, caixa };
   }
 
   
-  flashcards[index] = { pergunta, resposta, box };
+  flashcards[index] = { pergunta, resposta, caixa };
 
 
   criarConjunto();
