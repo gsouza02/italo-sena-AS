@@ -94,7 +94,7 @@ function gerarPreviewHTML(index) {
       <div class="flashcard-inner">
         <div class="flashcard-front">
           <h2 class="pour">PERGUNTA</h2>
-          <h2>${flashcard.pergunta}</h2>
+          <h2>${flashcards.length}</h2>
           
         </div>
         <div class="flashcard-back">

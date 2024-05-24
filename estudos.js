@@ -14,15 +14,6 @@ function mostrarFlashCard(card) {
     while(caixa3[i].pergunta !== perguntaCard) i++;
   }
 
-  if (flashcards.length < 2) {
-    container.innerHTML = `
-      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
-      <div class="line"></div>
-      <button class="button2" onclick="criarConjunto()">CRIE SEUS FLASHCARDS</button>
-      <button class="button2" onclick="iniciar()">VOLTAR!</button>
-    `;
-    return;
-  }
   container.innerHTML = `
   <div class="container">
     <div class="flashcard-container">
@@ -151,6 +142,17 @@ sorteio()
 }
 
 function sorteio(){
+  const container = document.querySelector('#main-container');
+  if (flashcards.length < 2) {
+    container.innerHTML = `
+      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
+      <div class="line"></div>
+      <button class="button2" onclick="criarConjunto()">CRIE SEUS FLASHCARDS</button>
+      <button class="button2" onclick="iniciar()">VOLTAR!</button>
+    `;
+    return;
+  }
+
  let caixa = sortearCaixa()
  let index = -1
 
