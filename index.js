@@ -143,9 +143,17 @@ function salvarEdicao(index) {
   const perguntaCard = card.pergunta;
   const caixa = card.caixa
 
-
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
+
+  const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+ 
+  if(perguntaExistente){
+   if(pergunta != perguntaCard){
+    document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
+    return;
+   }
+  }
 
   if (pergunta === '' || resposta === '') {
     document.querySelector('#error-message').textContent = 'Por favor, preencha tanto a pergunta quanto a resposta antes de salvar.';
