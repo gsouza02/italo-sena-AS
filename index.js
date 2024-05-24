@@ -139,6 +139,11 @@ function editarFlashcard(index) {
 }
 
 function salvarEdicao(index) {
+  const card = flashcards[index];
+  const perguntaCard = card.pergunta;
+  const box = card.caixa
+
+
   const pergunta = document.querySelector('#edit-pergunta').value;
   const resposta = document.querySelector('#edit-resposta').value;
   const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
@@ -148,20 +153,47 @@ function salvarEdicao(index) {
     return;
   }
 
-  flashcards[index] = { pergunta, resposta };
+
+  let i = 0;
+  if (box === 1) {
+    while(caixa1[i].pergunta != perguntaCard) i++;
+    caixa1[i] = { pergunta, resposta, box };
+  } else if (box === 2) {
+    while(caixa2[i].pergunta != perguntaCard) i++;
+    caixa2[i] = { pergunta, resposta, box };
+  } else {
+    while(caixa3[i].pergunta != perguntaCard) i++;
+    caixa3[i] = { pergunta, resposta, box };
+  }
+
+  
+  flashcards[index] = { pergunta, resposta, box };
+
+
   criarConjunto();
   mostrarPreview(index); 
 }
 
 function excluirFlashcard(index) {
-  const card = flashcards[index]
- //const card = flashcards.find(flashcard => flashcard.pergunta === pergunta);
-  if(card.caixa === 1) caixa1.find
-  else if(card.caixa === 2) caixa2
-  else caixa3
+  const card = flashcards[index];
+  const perguntaCard = card.pergunta;
+
+  let i = 0;
+  if (card.caixa === 1) {
+    while(caixa1[i].pergunta != perguntaCard) i++;
+    caixa1.splice(i, 1)
+  } else if (card.caixa === 2) {
+    while(caixa2[i].pergunta != perguntaCard) i++;
+    caixa2.splice(i, 1)
+  } else {
+    while(caixa3[i].pergunta != perguntaCard) i++;
+    caixa3.splice(i, 1)
+  }
+
   flashcards.splice(index, 1);
   criarConjunto();
 }
+
 
 function criarFlashcard() {
   document.body.style.backgroundColor = "#444";

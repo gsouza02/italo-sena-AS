@@ -32,10 +32,10 @@ function mostrarFlashCard(card) {
     </div>
    <div class="input-container">
     <input type="text" placeholder="Digite sua resposta aqui" />
-    <button class="send-icon" onclick="enviarResposta()">&#9654;</button>
+    <button class="send-icon" onclick="verificarResposta()">&#9654;</button>
     <button class="button2" onclick="iniciar()">FINALIZAR ESTUDOS</button>
-  </div>
-  </div>
+    </div>
+    </div>
 `;
 
 }
