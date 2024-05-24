@@ -1,6 +1,4 @@
-let flashcards = [];
 let virado = false;
-let curPos = 0
 
 function iniciarTransicao() {
   var container = document.getElementById('main-container');
@@ -44,46 +42,6 @@ function criarConjunto() {
   document.body.style.backgroundColor = "#4c88bd";
   renderFlashcards();
 }
-
-function iniciarEstudos() {
-  const container = document.querySelector('#main-container');
-
-  const flashcard = flashcards[curPos]
-  if (flashcards.length < 2) {
-    container.innerHTML = `
-      <div class="min10f">Você precisa de pelo menos 10 flashcards para iniciar os estudos</div>
-      <div class="line"></div>
-      <button class="button2" onclick ="criarConjunto()">CRIE SEUS FLASHCARDS</button>
-      <button class="button2" onclick="iniciar()">VOLTAR!</button>
-      `;
-    return;
-  }
-  container.innerHTML = `
-  <div class="container">
-  <div class="score">ACERTOS:0/10</div>
-  ${curPos !== 0 ? '<button class="button" onclick="flashcardAnterior()">ANTERIOR</button>' : ''}  
-  <div class="flashcard-card" onclick="virarFlashcard(this)">
-  <div class="flashcard-inner">
-  <div class="flashcard-front">
-  <h2 class="pour">PERGUNTA</h2>
-  <h2>${flashcard.pergunta}</h2>
-  </div>
-  <div class="flashcard-back">
-  <h2 class="pour">RESPOSTA</h2>
-  <h3> ${flashcard.resposta} </h3>
-  </div>
-  </div>
-  </div>
-  ${curPos !== flashcards.length - 1 ? '<button class="button" onclick="proximoFlashcard()">PRÓXIMO</button>' : ''} 
-  <div>
-  <input> </input>
-  <button class="button" onclick="iniciar()">VOLTAR À TELA INICIAL</button>
-  </div>
-</div>
-`;
-
-}
-
 
 function renderFlashcards() {
   const container = document.querySelector('#main-container');
@@ -249,22 +207,8 @@ function salvarNovoFlashcard() {
     document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
     return;
   }
-
-  flashcards.push({ pergunta, resposta });
+  const caixa = 1;
+  flashcards.push({ pergunta, resposta , caixa});
   criarConjunto();
   mostrarPreview(flashcards.length - 1);
-}
-
-
-
-function proximoFlashcard() {
-  if (curPos !== flashcards.length - 1) {curPos++;
-  }
-  iniciarEstudos()
-}
-
-function flashcardAnterior() {
-  if (curPos !== 0) {curPos--;
-  }
-  iniciarEstudos()
 }
