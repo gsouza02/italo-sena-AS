@@ -366,6 +366,17 @@
     color: #fff;
   }
 
+
+  .resultado-titulo {
+    font-size: 35px;
+    color: #e0f2ff;
+    margin-bottom: 10px;
+    margin-top: 2px; /* Ajuste este valor conforme necessário */
+    position: relative;
+    display: inline-block;
+    text-shadow: 4px 4px 4px black;
+    font-family: 'sans-serif';
+  }
   .min10f {
     font-size: 35px;
     color: #e0f2ff;
@@ -524,4 +535,13 @@
   width: 400px;
   margin-bottom: 20px;
   border-radius: 20px;
+}
+
+
+
+.resultado-texto {
+  font-size: 25px;
+  color: #e0f2ff;
+  font-family: 'sans-serif';
+  margin-bottom: 10%;
 }
