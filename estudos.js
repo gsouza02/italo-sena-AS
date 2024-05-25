@@ -24,7 +24,6 @@ function mostrarFlashCard(card) {
           <div class="flashcard-front">
             <h2 class="pour">PERGUNTA</h2>
             <h2>${card.pergunta}</h2>
-            <h3>CAIXA:${card.caixa}</h3>
           </div>
           <div class="flashcard-back">
             <h2 class="pour">RESPOSTA</h2>
