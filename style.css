@@ -284,6 +284,8 @@
     /* Adicione o preenchimento necessário conforme necessário */
   }
 
+  
+
 
   .button:hover {
     transform: scale(1.1, 1.1);
@@ -294,6 +296,10 @@
   }
 
   .button3:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  .send-icon:hover {
     transform: scale(1.1, 1.1);
   }
 
@@ -436,17 +442,31 @@
     border-radius: 20px;
     font-weight: bold;
     padding: 10px 20px;
-    margin-left: 30px; 
     color: #e0f2ff;
     font-size: 22px;
     cursor: pointer;
-    margin: 10px auto;
-    width: 50px; /* Ajuste o tamanho conforme necessário /
-    height: 50px; / Ajuste o tamanho conforme necessário */
+    width: 50px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    right: -20px;
+    margin: 10px auto;
+    position: relative;
+  }
+  
+  .button5 {
+    background-color: #444;
+    border: 3px solid #e0f2ff;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #e0f2ff;
+    font-size: 22px;
+    cursor: pointer;
+    width: 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
     position: relative;
   }
   
@@ -458,6 +478,7 @@
     width: 50px;
     height: 50px;
     margin-top: 10px;
+    margin: 10px auto;
   }
   
   input[type="text"] {
@@ -544,4 +565,42 @@
   color: #e0f2ff;
   font-family: 'sans-serif';
   margin-bottom: 10%;
+}
+
+.pergunta-caixa1 {
+  color: green;
+}
+
+.pergunta-caixa2 {
+  color: yellow;
+}
+
+.pergunta-caixa3 {
+  color: red;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s forwards;
 }

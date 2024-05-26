@@ -1,7 +1,8 @@
 let totalRevisados = 0;
 let totalCorretos = 0;
+let historicoFlashcards = [];
 
-function mostrarFlashCard(card) {
+function mostrarFlashCard(card, isPrevious = false) {
   document.body.style.backgroundColor = "#444";
   const container = document.querySelector('#main-container');
   const perguntaCard = card.pergunta;
@@ -18,19 +19,36 @@ function mostrarFlashCard(card) {
     while (caixa3[i].pergunta !== perguntaCard) i++;
   }
 
+  if (!isPrevious) {
+    historicoFlashcards.push(card);
+  }
+
+  let corPergunta;
+  let corResposta;
+  if (card.caixa === 1) {
+    corPergunta = 'green'; 
+    corResposta = 'lightgreen'; //verde clarin
+  } else if (card.caixa === 2) {
+    corPergunta = 'yellow'; 
+    corResposta = 'lightyellow'; //amarelo clarin
+  } else {
+    corPergunta = 'red'; 
+    corResposta = 'lightcoral';  //vermelho clarin
+  }
+
   container.innerHTML = `
     <div class="container">
       <div class="flashcard-container">
-        ${curPos !== 0 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
+      ${historicoFlashcards.length > 1 ? '<button class="button4" onclick="flashcardAnterior()">&#9664;</button>' : '<div class="placeholder"></div>'}
         <div class="flashcard-card" onclick="virarFlashcard(this)">
           <div class="flashcard-inner">
             <div class="flashcard-front">
-              <h2 class="pour">PERGUNTA</h2>
+            <h2 class="pour" style="color: ${corPergunta};">PERGUNTA</h2>
               <h2>${card.pergunta}</h2>
               <h3>CAIXA:${card.caixa}</h3>
             </div>
             <div class="flashcard-back">
-              <h2 class="pour">RESPOSTA</h2>
+            <h2 class="pour" style="color: ${corResposta};">RESPOSTA</h2>
               <h3>${card.resposta}</h3>
             </div>
           </div>
@@ -44,6 +62,14 @@ function mostrarFlashCard(card) {
       </div>
     </div>
   `;
+}
+
+function flashcardAnterior() {
+  historicoFlashcards.pop();
+
+  const cardAnterior = historicoFlashcards[historicoFlashcards.length - 1];
+  const container = document.querySelector('.container');
+  mostrarFlashCard(cardAnterior, true);
 }
 
 function getRandomInt(min, max) {
@@ -110,6 +136,7 @@ function verificaResposta(index, caixa, flashcardIndex) {
       caixa1[index].caixa = 2;
       caixa2.push(caixa1[index]);
       caixa1.splice(index, 1);
+      document.querySelector('.pour').style.color = '#444'
       totalCorretos++;
     }
   } else if (caixa === 2) {
@@ -164,17 +191,24 @@ function sorteio() {
 }
 
 function finalizarEstudos() {
+
+  historicoFlashcards = [];
+
   const container = document.querySelector('#main-container');
   container.innerHTML = `
     <div class="resultado-estudos">
       <h1 class="resultado-titulo">Resultados</h1>
-      <div class="line"></div>
+      <div class="line"></div>  
       <div class="resultado-texto">
         Você acertou ${totalCorretos} de ${totalRevisados} respostas.
       </div>
       <button class="button3" onclick="voltar()">Voltar</button>
     </div>
   `;
+
+
+  totalRevisados = 0;
+  totalCorretos = 0;
 }
 
 
