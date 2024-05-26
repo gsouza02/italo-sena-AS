@@ -26,14 +26,14 @@ function mostrarFlashCard(card, isPrevious = false) {
   let corPergunta;
   let corResposta;
   if (card.caixa === 1) {
-    corPergunta = 'green'; 
-    corResposta = 'lightgreen'; //verde clarin
+    corPergunta = 'red'; 
+    corResposta = 'lightcoral'; //vermelho clarin
   } else if (card.caixa === 2) {
     corPergunta = 'yellow'; 
     corResposta = 'lightyellow'; //amarelo clarin
   } else {
-    corPergunta = 'red'; 
-    corResposta = 'lightcoral';  //vermelho clarin
+    corPergunta = 'green'; 
+    corResposta = 'lightgreen';  //verde clarin
   }
 
   container.innerHTML = `
@@ -45,7 +45,6 @@ function mostrarFlashCard(card, isPrevious = false) {
             <div class="flashcard-front">
             <h2 class="pour" style="color: ${corPergunta};">PERGUNTA</h2>
               <h2>${card.pergunta}</h2>
-              <h3>CAIXA:${card.caixa}</h3>
             </div>
             <div class="flashcard-back">
             <h2 class="pour" style="color: ${corResposta};">RESPOSTA</h2>
