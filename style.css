@@ -211,8 +211,8 @@
     width: 300px;
     height: 550px;
     perspective: 1000px;
-    display: flex; /* Adicionamos isso para alinhar o conteúdo do flashcard ao centro */
-    justify-content: center; /* Centralizamos horizontalmente o conteúdo do flashcard */
+    display: flex; 
+    justify-content: center; 
   align-items: center; 
     }
 
@@ -273,7 +273,6 @@
 
   .pour {
     color: #e0f2ff;
-    /* Cor do texto */
     font-weight: bold;
     text-shadow: 4px 4px 4px black;
     font: 'sans-serif';
@@ -281,8 +280,9 @@
     top: 0;
     left: 0;
     padding: 84px;
-    /* Adicione o preenchimento necessário conforme necessário */
   }
+
+  
 
 
   .button:hover {
@@ -297,10 +297,14 @@
     transform: scale(1.1, 1.1);
   }
 
+  .send-icon:hover {
+    transform: scale(1.1, 1.1);
+  }
+
 
   .nomes-flashcards {
-    max-height: 370px; /* Defina a altura máxima desejada */
-    overflow-y: auto;  /* Habilita o scroll vertical */
+    max-height: 370px; 
+    overflow-y: auto;  
   }
 
 
@@ -366,11 +370,22 @@
     color: #fff;
   }
 
+
+  .resultado-titulo {
+    font-size: 35px;
+    color: #e0f2ff;
+    margin-bottom: 10px;
+    margin-top: 2px; 
+    position: relative;
+    display: inline-block;
+    text-shadow: 4px 4px 4px black;
+    font-family: 'sans-serif';
+  }
   .min10f {
     font-size: 35px;
     color: #e0f2ff;
     margin-bottom: 10px;
-    margin-top: 2px; /* Ajuste este valor conforme necessário */
+    margin-top: 2px; 
     position: relative;
     display: inline-block;
     text-shadow: 4px 4px 4px black;
@@ -425,17 +440,31 @@
     border-radius: 20px;
     font-weight: bold;
     padding: 10px 20px;
-    margin-left: 30px; 
     color: #e0f2ff;
     font-size: 22px;
     cursor: pointer;
-    margin: 10px auto;
-    width: 50px; /* Ajuste o tamanho conforme necessário /
-    height: 50px; / Ajuste o tamanho conforme necessário */
+    width: 50px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    right: -20px;
+    margin: 10px auto;
+    position: relative;
+  }
+  
+  .button5 {
+    background-color: #444;
+    border: 3px solid #e0f2ff;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #e0f2ff;
+    font-size: 22px;
+    cursor: pointer;
+    width: 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
     position: relative;
   }
   
@@ -447,6 +476,7 @@
     width: 50px;
     height: 50px;
     margin-top: 10px;
+    margin: 10px auto;
   }
   
   input[type="text"] {
@@ -468,14 +498,14 @@
   }
   .input-container .send-icon {
     background-color: #444;
-    margin-top: 60px; /* Adicione a margem superior desejada */
+    margin-top: 60px; 
     font-size: 28px;
     color: #e0f2ff;
     cursor: pointer;
-    margin-left: 20px; /* Ajuste conforme necessário */
-    border: solid 3px #e0f2ff; /* Adiciona a mesma borda da entrada */
+    margin-left: 20px; 
+    border: solid 3px #e0f2ff; 
     border-radius: 20px;
-    width: 50px; /* Ajuste a largura conforme necessário */
+    width: 50px; 
     height: 50px;
   }
 
@@ -504,7 +534,7 @@
   font-size: 18px;
   color: #e0f2ff;
   cursor: pointer;
-  margin-left: 10px; /* Ajuste conforme necessário */
+  margin-left: 10px; 
 }
 
 
@@ -524,4 +554,62 @@
   width: 400px;
   margin-bottom: 20px;
   border-radius: 20px;
+}
+
+
+
+.resultado-texto {
+  font-size: 25px;
+  color: #e0f2ff;
+  font-family: 'sans-serif';
+  margin-bottom: 10%;
+}
+
+.pergunta-caixa1 {
+  color: green;
+}
+
+.pergunta-caixa2 {
+  color: yellow;
+}
+
+.pergunta-caixa3 {
+  color: red;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s forwards;
+}
+
+.button5-container {
+  position: fixed; 
+  bottom: 15px; 
+  display: flex;
+  padding-bottom: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
