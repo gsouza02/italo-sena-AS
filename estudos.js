@@ -129,6 +129,8 @@ function sortearCaixa3() {
 function verificaResposta(index, caixa, flashcardIndex) {
   const resposta = document.querySelector('#resposta-usuario').value;
 
+  if(!resposta) return;
+
   if (caixa === 1) {
     if (resposta === caixa1[index].resposta) {
       flashcards[flashcardIndex].caixa = 2;
@@ -164,6 +166,9 @@ function verificaResposta(index, caixa, flashcardIndex) {
 
 function sorteio() {
   const container = document.querySelector('#main-container');
+
+  if(flashcards.length < 2 )
+   { document.querySelector('#error-message').textContent = 'É necessário criar pelo menos 10 flashcards para iniciar'; return;}
   
   let caixa = sortearCaixa();
   let index = -1;

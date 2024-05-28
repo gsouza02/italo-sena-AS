@@ -12,7 +12,7 @@ function iniciar() {
   container.innerHTML = `
     <div class="container">
       <div id="error-message" style="color: red;"></div>
-      <button class="button2" onclick="msgErroIniciar()">INICIAR ESTUDO</button2>
+      <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button2>
       <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
       <button class="button2" onclick="voltar()">VOLTAR</button2>
     </div>
@@ -78,12 +78,11 @@ function renderFlashcards() {
           ${flashcards.length > 0 ? gerarPreviewHTML(0) : '<h2>Selecione um flashcard</h2>'}
         </div>
         </div>
-        <div class="button5-container">
-        <button class="button2" onclick="msgErroIniciar()">INICIAR ESTUDO</button>
+        </div>
+        </div>
+        <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button>
         <div id="error-message" style="color: red;"></div>
-      </div>
-    </div>
-  `;
+        `;
 }
 
 function mostrarPreview(index) {
@@ -151,12 +150,12 @@ function salvarEdicao(index) {
   const resposta = document.querySelector('#edit-resposta').value;
 
   const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
- 
-  if(perguntaExistente){
-   if(pergunta != perguntaCard){
-    document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
-    return;
-   }
+
+  if (perguntaExistente) {
+    if (pergunta != perguntaCard) {
+      document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
+      return;
+    }
   }
 
   if (pergunta === '' || resposta === '') {
@@ -167,22 +166,22 @@ function salvarEdicao(index) {
 
   let i = 0;
   if (caixa === 1) {
-    while(caixa1[i].pergunta != perguntaCard) i++;
+    while (caixa1[i].pergunta != perguntaCard) i++;
     caixa1[i] = { pergunta, resposta, caixa };
   } else if (caixa === 2) {
-    while(caixa2[i].pergunta != perguntaCard) i++;
+    while (caixa2[i].pergunta != perguntaCard) i++;
     caixa2[i] = { pergunta, resposta, caixa };
   } else {
-    while(caixa3[i].pergunta != perguntaCard) i++;
+    while (caixa3[i].pergunta != perguntaCard) i++;
     caixa3[i] = { pergunta, resposta, caixa };
   }
 
-  
+
   flashcards[index] = { pergunta, resposta, caixa };
 
 
   criarConjunto();
-  mostrarPreview(index); 
+  mostrarPreview(index);
 }
 
 function excluirFlashcard(index) {
@@ -191,13 +190,13 @@ function excluirFlashcard(index) {
 
   let i = 0;
   if (card.caixa === 1) {
-    while(caixa1[i].pergunta != perguntaCard) i++;
+    while (caixa1[i].pergunta != perguntaCard) i++;
     caixa1.splice(i, 1)
   } else if (card.caixa === 2) {
-    while(caixa2[i].pergunta != perguntaCard) i++;
+    while (caixa2[i].pergunta != perguntaCard) i++;
     caixa2.splice(i, 1)
   } else {
-    while(caixa3[i].pergunta != perguntaCard) i++;
+    while (caixa3[i].pergunta != perguntaCard) i++;
     caixa3.splice(i, 1)
   }
 
@@ -235,7 +234,7 @@ function criarFlashcard() {
 function salvarNovoFlashcard() {
   const pergunta = document.querySelector('#new-pergunta').value.trim();
   const resposta = document.querySelector('#new-resposta').value.trim();
-  
+
   const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
 
   if (pergunta === '' || resposta === '') {
@@ -247,19 +246,19 @@ function salvarNovoFlashcard() {
     document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
     return;
   }
-  
+
   const caixa = 1;
-  flashcards.push({ pergunta, resposta , caixa});
-  caixa1.push({pergunta, resposta, caixa})
+  flashcards.push({ pergunta, resposta, caixa });
+  caixa1.push({ pergunta, resposta, caixa })
   criarConjunto();
   mostrarPreview(flashcards.length - 1);
 }
 
-function msgErroIniciar(){
-  if(flashcards.length < 1) {
-  document.querySelector('#error-message').textContent = 'Por favor, crie 10 flashcards antes de continuar.';
-  return;
-}else{
-  sortear();
-}
+function msgErroIniciar() {
+  if (flashcards.length < 1) {
+    document.querySelector('#error-message').textContent = 'Por favor, crie 10 flashcards antes de continuar.';
+    return;
+  } else {
+    sortear();
+  }
 }
