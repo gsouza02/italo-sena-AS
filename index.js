@@ -260,6 +260,6 @@ function msgErroIniciar(){
   document.querySelector('#error-message').textContent = 'Por favor, crie 10 flashcards antes de continuar.';
   return;
 }else{
-  sortear();
+  sorteio();
 }
 }
