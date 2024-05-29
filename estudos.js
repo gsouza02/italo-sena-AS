@@ -158,7 +158,7 @@ function verificaResposta(index, caixa, flashcardIndex) {
       caixa3[index].caixa = 2;
       caixa2.push(caixa3[index]);
       caixa3.splice(index, 1);
-    }
+    } else totalCorretos++;
   }
   totalRevisados++;
   sorteio(); 
