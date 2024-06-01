@@ -12,9 +12,12 @@ function iniciar() {
   container.innerHTML = `
     <div class="container">
       <div id="error-message" style="color: red;"></div>
-      <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button2>
-      <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button2>
-      <button class="button2" onclick="voltar()">VOLTAR</button2>
+      <button class="button2" onclick="sorteio()">INICIAR ESTUDO</button>
+      <button class="button2" onclick="criarConjunto()">CRIAR FLASHCARDS</button>
+      <button class="button2" onclick="msgErroIniciarExporte()">EXPORTAR FLASHCARDS</button>
+      <input type="file" id="importar-file" style="display:none;" accept="application/json" onchange="importarFlashcards(event)" />
+      <button class="button2" onclick="document.getElementById('importar-file').click()">IMPORTAR FLASHCARDS</button>
+      <button class="button2" onclick="voltar()">VOLTAR</button>
     </div>
   `;
 }
@@ -261,4 +264,108 @@ function msgErroIniciar() {
   } else {
     sortear();
   }
+}
+
+function msgErroIniciarExporte() {
+  if (flashcards.length < 1) {
+    document.querySelector('#error-message').textContent = 'Não existem flashcards para exportar.';
+    return;
+  } else {
+    obterFlashcardExport();
+  }
+}
+
+function obterFlashcardExport(){
+  document.body.style.backgroundColor = "#444";
+  const container = document.querySelector('#main-container');
+  container.innerHTML = `
+    <div class="container sans-serif">
+      <div class="flashcard-edit-container">
+        <h2>Digite a pergunta do flashcard que deseja importar!</h2>
+        <div class="line2"></div>
+        <div class="input-group">
+          <input type= "text" name="text" id="new-pergunta" required>
+          <label class= "label"> Pergunta </label>
+          </div>
+          <div id="error-message" style="color: red;"></div>
+        <div class="button-container">
+          <button class="button3" onclick="exportarFlashcards()">CONFIRMAR</button>
+          <button class="button3" onclick="iniciar()">CANCELAR</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function exportarFlashcards() {
+  const pergunta = document.querySelector('#new-pergunta').value.trim();
+  const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+
+  if (pergunta === '') {
+    document.querySelector('#error-message').textContent = 'Por favor, insira a pergunta do flashcard que deseja Exportar.';
+    return;
+  }
+
+  if (perguntaExistente) {
+    const exportJSON = JSON.stringify(perguntaExistente, null, 2);
+
+    const blob = new Blob([exportJSON], { type: 'application/json' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'perguntaExistente.json';
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+
+    console.log('Arquivo JSON foi preparado para download');
+  } else {
+    document.querySelector('#error-message').textContent = 'Pergunta não encontrada nos flashcards.';
+  }
+
+  iniciar();
+}
+
+function mostrarInput() {
+  const fileInput = document.querySelector('#file-input');
+  fileInput.click();
+}
+
+function importarFlashcards(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    document.querySelector('#error-message').textContent = 'Por favor, selecione um arquivo JSON.';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const flashcardsImportados = JSON.parse(e.target.result);
+      if (Array.isArray(flashcardsImportados)) {
+        flashcards = flashcards.concat(flashcardsImportados);
+      } else if (flashcardsImportados && typeof flashcardsImportados === 'object') {
+        const pergunta = flashcardsImportados.pergunta;
+        const perguntaExistente = flashcards.find(flashcard => flashcard.pergunta === pergunta);
+        if (perguntaExistente) {
+            document.querySelector('#error-message').textContent = 'Já existe um flashcard com esta pergunta!';
+            return;
+        }else{
+        const resposta = flashcardsImportados.resposta;
+        const caixa = 1;
+        flashcards.push({ pergunta, resposta, caixa });
+        caixa1.push({ pergunta, resposta, caixa })
+        mostrarPreview(flashcards.length - 1);
+        }
+      } else {
+        throw new Error('Formato de arquivo inválido');
+      }
+      document.querySelector('#error-message').textContent = 'Flashcards importados com sucesso!';
+    } catch (error) {
+      document.querySelector('#error-message').textContent = 'Flashcards importados com sucesso!';
+    }
+  };
+  reader.readAsText(file);
 }
